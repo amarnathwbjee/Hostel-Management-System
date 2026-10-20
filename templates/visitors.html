@@ -1,0 +1,19 @@
+{% extends "base.html" %}{% block title %}Visitors{% endblock %}{% block content %}
+Visitor Register
+Track visitor check-ins and check-outs
+
+Register Visitor
+Visitor name
+Student Hostel ID
+STU1001
+Contact number
+Purpose
+Check In
+Visitor History
+{% for v in visitors %}{% else %}{% endfor %}
+Visitor	Student	Contact	Purpose	Check in	Check out	Action
+{{ v.visitor_name }}	{{ v.hostel_id or '—' }} {{ v.first_name or '' }} {{ v.last_name or '' }}	{{ v.contact }}	{{ v.purpose }}	{{ v.check_in }}	{{ v.check_out or 'Still inside' }}	{% if not v.check_out %}
+Check Out
+{% else %}—{% endif %}
+No visitors recorded.
+{% endblock %}

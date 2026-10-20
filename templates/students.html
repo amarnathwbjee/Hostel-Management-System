@@ -1,0 +1,13 @@
+{% extends "base.html" %}{% block title %}Students{% endblock %}{% block content %}
+Students
+Student details and room allocation
+
+＋ Add Student
+{{ q }}
+Search{% if q %}Clear{% endif %}
+{% for s in students %}{% else %}{% endfor %}
+Hostel ID	Name	Contact / Email	Gender	Room / Bed	College	Action
+{{ s.hostel_id }}	{{ s.first_name }} {{ s.last_name }}Joined {{ s.joined_at }}	{{ s.contact }}{{ s.email }}	{{ s.gender }}	{{ s.room_number or 'Not allocated' }}{% if s.bed_number %}Bed {{ s.bed_number }}{% endif %}	{{ s.college }}	
+Delete
+No students found.
+{% endblock %}  

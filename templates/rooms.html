@@ -1,0 +1,18 @@
+{% extends "base.html" %}{% block title %}Rooms{% endblock %}{% block content %}
+Rooms
+Create rooms and monitor bed capacity
+
+Add a Room
+Room number
+e.g. B103
+Category
+Boys
+Bed capacity
+3
+Add Room
+Room Inventory
+{% for r in rooms %}{% else %}{% endfor %}
+Room	Category	Capacity	Occupied	Available	Status
+{{ r.room_number }}	{{ r.category }}	{{ r.capacity }}	{{ r.occupied }}	{{ r.capacity-r.occupied }}	{{ 'Full' if r.occupied>=r.capacity else 'Available' }}
+No rooms created.
+{% endblock %}
