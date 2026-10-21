@@ -1,6 +1,0 @@
-.venv/
-__pycache__/
-*.py[cod]
-hostel.db
-.env
-.DS_Store
