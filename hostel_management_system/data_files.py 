@@ -1,0 +1,16 @@
+import os
+
+os.makedirs("data", exist_ok=True)
+
+file_names = ["data/inouttime.txt", "data/leave_applications.txt", "data/room_info_boys.txt", "data/room_info_girls.txt", "data/student_info.txt", "data/room_info_others.txt", "data/visitor_info.txt"]
+
+for file_name in file_names:
+    if not os.path.exists(file_name):
+        try:
+            with open(file_name, "x") as fp:
+                pass  # File created successfully
+        except FileExistsError:
+            print(f"File {file_name} already exists.")
+    else:
+        print(f"File {file_name} already exists.")
+

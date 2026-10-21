@@ -1,0 +1,63 @@
+from tkinter.ttk import *
+from tkinter import *
+import os
+from core.window import base
+from utils.datetime_utils import date
+
+
+def leave_application():
+    canvas = Canvas(base, bg='silver', height=675, width=1210)
+    canvas.place(x=320, y=105)
+    h1 = Label(base, text="Leave Application", bg="dark slate grey", font=("Arial 20 bold"), fg="white",
+               padx=485, pady=10)
+    h1.place(x=320, y=105)
+
+    h_id = Label(base, text="Hostel ID", bg="silver", font=("Arial 20 bold"), fg="black")
+    h_id.place(x=400, y=200)
+    id_entry = Entry(base, width=15, font=("Arial 20"))
+    id_entry.place(x=550, y=200)
+
+    n_label = Label(base, text="Name", bg="silver", font=("Arial 20 bold"), fg="black")
+    n_label.place(x=800, y=200)
+    n_entry = Entry(base, width=20, font=("Arial 20"))
+    n_entry.place(x=900, y=200)
+
+    r_label = Label(base, text="Room No.", bg="silver", font=("Arial 20 bold"), fg="black")
+    r_label.place(x=400, y=300)
+    r_entry = Entry(base, width=15, font=("Arial 20"))
+    r_entry.place(x=550, y=300)
+
+    m_no = Label(base, text="Mobile No.", bg="silver", font=("Arial 20 bold"), fg="black")
+    m_no.place(x=800, y=300)
+    m_entry = Entry(base, width=15, font=("Arial 20"))
+    m_entry.place(x=950, y=300)
+
+    reason = Label(base, text="Reason For Leave", bg="silver", font=("Arial 20 bold"), fg="black")
+    reason.place(x=400, y=400)
+
+    reason_entry = Entry(base, width=20, font=("Arial 20"))
+    reason_entry.place(x=700, y=400)
+
+    return_date = Label(base, text="Return Date", bg="silver", font=("Arial 20 bold"), fg="black")
+    return_date.place(x=400, y=500)
+    x = Label(base, text="(YEAR-DD-MM)", font=("Arial 15 bold"), bg="silver", fg="black")
+    x.place(x=1000, y=500)
+    date_entry = Entry(base, width=18, font=("Arial 20"))
+    date_entry.place(x=700, y=500)
+
+    def leave_info():
+        i = str(id_entry.get())
+        n = str(n_entry.get())
+        r = str(r_entry.get())
+        m = str(m_entry.get())
+        reas = str(reason_entry.get())
+        rdate = str(date_entry.get())
+        current_date = date()
+        fopen = open("data/leave_applications.txt", "a")
+        fopen.write(i + "," + n + "," + r + "," + m + "," + reas + "," + current_date + "," + rdate + "," + "\n")
+        fopen.close()
+        success = Label(base, text="Submit Successfully..!", font=("Arial 20 bold"), fg="green", bg="white")
+        success.place(x=700, y=700)
+
+    submit = Button(base, text="Submit", font=("Arial 20 bold"), fg="black", command=leave_info)
+    submit.place(x=700, y=600)

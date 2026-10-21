@@ -1,0 +1,11 @@
+from tkinter.ttk import *
+from tkinter import *
+
+base = Tk()
+base.title("HOSTEL MANAGEMENT SYSTEM")
+base.geometry(f'{1535}x{790}+{0}+{0}')
+heading = Label(base, text="HOSTEL MANAGEMENT SYSTEM", font=("Arial 30 bold"), bg="lightseagreen", fg="white", padx=490, pady=20)
+heading.pack()
+
+canvas = Canvas(base, bg='silver', height=575, width=800)
+canvas.place(x=330, y=130)

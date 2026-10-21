@@ -1,0 +1,5 @@
+import core.data_files  # creates data/ and the .txt files first (as in original)
+from core.window import base
+import auth.login  # builds the login screen
+
+base.mainloop()

@@ -1,0 +1,34 @@
+#psswd of this code is :id == "user123" and key == "000":
+
+from tkinter.ttk import *
+from tkinter import *
+import os
+from core.window import base
+from ui.dashboard import main
+
+username = Label(base, text="Username", font=("Arial 25 bold"), bg="silver", fg="black")
+username.place(x=470, y=240)
+user_entry = Entry(base, width=17, font=("Arial 20"))
+user_entry.place(x=650, y=245)
+user_entry.focus()
+
+password = Label(base, text="Password", font=("Arial 25 bold"), bg="silver", fg="black")
+password.place(x=470, y=350)
+pass_entry = Entry(base, width=17, font="Arial 20")
+pass_entry.place(x=650, y=355)
+
+def login():
+    id = str(user_entry.get())
+    key = str(pass_entry.get())
+    if id == "user123" and key == "000":
+        main()
+    else:
+        user_entry.focus()
+        user_entry.delete(0, END)
+        pass_entry.delete(0, END)
+        fail = Label(base, text="Wrong Username Or Password...!", font=("Arial 30 bold"), bg="silver", fg="red")
+        fail.place(x=450, y=540)
+
+
+login_btn = Button(base, text="Login", font=("Arial 25 bold"), bg="lightseagreen", fg="white", command=login)
+login_btn.place(x=650, y=440)

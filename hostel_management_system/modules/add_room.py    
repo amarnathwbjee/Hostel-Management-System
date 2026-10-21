@@ -1,0 +1,87 @@
+from tkinter.ttk import *
+from tkinter import *
+import os
+from core.window import base
+
+G = 1
+
+
+def add_room():
+    canvas = Canvas(base, bg='silver', height=675, width=1210)
+    canvas.place(x=320, y=105)
+    h1 = Label(base, text="Add New Room", bg="dark slate grey", font=("Arial 20 bold"), fg="white", padx=500,
+               pady=10)
+    h1.place(x=320, y=105)
+
+    n_rm_n = Label(base, text="New Room No.", font=("Arial 20 bold"), bg="silver", fg="black")
+    n_rm_n.place(x=500, y=300)
+    rm_n_entry = Entry(base, width=20, font=("Arial 15 bold"))
+    rm_n_entry.place(x=750, y=303)
+    gender = Label(base,text="Gender", font=("Arial 20 bold"), bg="silver", fg="black")
+    gender.place(x=500,y=350)
+
+    global G
+    G = 1
+    def selected():
+        global G
+        if c1.get() == 1:
+            G = 1
+        if c1.get() == 2:
+            G = 2
+        if c1.get() == 0:
+            G = 0
+    c1 = IntVar()
+    a = Radiobutton(base, text="Male", bg="silver", fg="black", font=("Arial 15 bold"), variable=c1, value=1,
+                    command=selected)
+    b = Radiobutton(base, text="Female", bg="silver", fg="black", font=("Arial 15 bold"), variable=c1, value=2,
+                    command=selected)
+    c = Radiobutton(base, text="Other", bg="silver", fg="black", font=("Arial 15 bold"), variable=c1, value=0,
+                    command=selected)
+    a.place(x=750, y=350)
+    b.place(x=840, y=350)
+    c.place(x=950, y=350)
+    def add():
+        file_name = ""
+        bed1 = bed2 = bed3 = None
+        r = (rm_n_entry.get())
+        if G==1:
+            bed1 = "B1"
+            bed2 = "B2"
+            bed3 = "B3"
+            file_name = "data/room_info_boys.txt"
+            f2 = open(file_name, "r")
+        if G==2:
+            bed1 = "G1"
+            bed2 = "G2"
+            bed3 = "G3"
+            file_name = "data/room_info_girls.txt"
+            f2 = open(file_name, "r")
+        if G==0:
+            bed1 = "O1"
+            bed2 = "O2"
+            bed3 = "O3"
+            file_name = "data/room_info_others.txt"
+            f2 = open(file_name, "r")
+        all_lines = f2.readlines()
+        count = 0
+        for i in all_lines:
+            temp = str(i)
+            one_line = temp.split(',')
+            if one_line[0] == r:
+                l = Label(base, text="Room Is Already Addded....!", font=("Arial 25 bold"), bg='silver',
+                          fg="black")
+                l.place(x=650, y=600)
+                f2.close()
+                count = 2
+        f2.close()
+        if count != 2:
+            q = "NOT"
+            f1 = open(file_name, "a")
+            f1.write(r + "," + bed1 + "," + bed2 + "," + bed3 + "," + q + "," + "\n")
+            f1.close()
+            l = Label(base, text="ROOM Successfully Added....!", font=("Arial 25 bold"), bg='silver',
+                      fg="black")
+            l.place(x=650, y=600)
+
+    ad_rm_btn = Button(base, text="Add Room", font=("Arial 20 bold"), bg="white", fg="black", command=add)
+    ad_rm_btn.place(x=550, y=500)

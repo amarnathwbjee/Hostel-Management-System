@@ -1,0 +1,8 @@
+def date():
+    from datetime import datetime
+    # current date time
+    now = datetime.now()
+    t = now.strftime("%H:%M")
+    s1 = now.strftime("%H:%M,%Y-%m-%d")
+    s1 = str(s1)
+    return s1 #returns Current Date And Time In String

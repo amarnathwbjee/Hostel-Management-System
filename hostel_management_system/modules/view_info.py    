@@ -1,0 +1,124 @@
+from tkinter.ttk import *
+from tkinter import *
+import os
+from core.window import base
+
+
+def view_info():
+    canvas = Canvas(base, bg='silver', height=675, width=1215)
+    canvas.place(x=320, y=105)
+
+    def all_girl_info():
+        canvas = Canvas(base, bg='silver', height=675, width=810)
+        canvas.place(x=715, y=105)
+        h1 = Label(base, text="Information Of Students", font=("Arial 20 bold"), bg="dark slate grey", fg="white",
+                   padx=270, pady=5)
+        h1.place(x=720, y=105)
+
+        h = "Room NO.           Name             Contact             Workplace"
+        h2 = Label(base, text=h, font=("Arial 20 bold"), bg="dark orange", fg="white")
+        h2.place(x=723, y=150)
+
+        students = []
+        f1 = open("data/student_info.txt", "r")
+        all_lines = f1.readlines()
+        for i in all_lines:
+            temp = str(i)
+            one_line = temp.split(',')
+            t = []
+            t.append(one_line[11])
+            t.append(one_line[1])
+            t.append(one_line[0])
+            t.append(one_line[6])
+            students.append(t)
+        x1co = 800
+        y1co = 200
+        x2co = 900
+        x3co = 1160
+        x4co = 1380
+        flag = 1
+
+        for i in students:
+            y = i
+            c = 0
+            while c <= 2:
+                label = Label(base, text=y[0], font=("Arial 15 bold"), bg="silver", fg="black")
+                label.place(x=x1co, y=y1co)
+                label2 = Label(base, text=y[1], font=("Arial 15 bold"), bg="silver", fg='black')
+                label2.place(x=x2co, y=y1co)
+                label3 = Label(base, text=y[2], font=('Arial 15 bold'), bg="silver", fg='black')
+                label3.place(x=x3co, y=y1co)
+                label4 = Label(base, text=y[3], font=("Arial 15 bold"), bg="silver", fg="black")
+                label4.place(x=x4co, y=y1co)
+                c = c + 1
+            y1co = y1co + 50
+            if flag > 8:
+                break
+
+    def room_wise():
+        canvas = Canvas(base, bg='silver', height=675, width=810)
+        canvas.place(x=715, y=105)
+        l1 = Label(base, text="Enter Room No.", font=("Arial 20 bold"), bg="silver", fg="black")
+        l1.place(x=750, y=150)
+        l1_entry = Entry(base, width=10, font=("Arial 20 bold"))
+        l1_entry.place(x=1000, y=150)
+        l1_entry.focus()
+
+        def search():
+            r_no = str(l1_entry.get())
+            f1 = open("data/student_info.txt", "r")
+            all_lines = f1.readlines()
+            r_info = []
+            for i in all_lines:
+                temp = str(i)
+                one_line = temp.split(',')
+                if one_line[11] == r_no:
+                    temp = []
+                    temp.append(one_line[10])
+                    temp.append(one_line[1])
+                    temp.append(one_line[0])
+                    temp.append(one_line[6])
+                    r_info.append(temp)
+            h1 = Label(base, text="Information Of Students", font=("Arial 20 bold"), bg="dark slate grey",
+                       fg="white", padx=270, pady=5)
+            h1.place(x=720, y=250)
+
+            h = "Bed No.              Name                 Contact                Workplace"
+            h2 = Label(base, text=h, font=("Arial 20 bold"), bg="dark orange", fg="white")
+            h2.place(x=723, y=300)
+            x1co = 780
+            y1co = 400
+            x2co = 900
+            x3co = 1160
+            x4co = 1380
+            flag = 1
+
+            for i in r_info:
+                y = i
+                c = 0
+                while c <= 2:
+                    label = Label(base, text=y[0], font=("Arial 15 bold"), bg="silver", fg="black")
+                    label.place(x=x1co, y=y1co)
+                    label2 = Label(base, text=y[1], font=("Arial 15 bold"), bg="silver", fg='black')
+                    label2.place(x=x2co, y=y1co)
+                    label3 = Label(base, text=y[2], font=('Arial 15 bold'), bg="silver", fg='black')
+                    label3.place(x=x3co, y=y1co)
+                    label4 = Label(base, text=y[3], font=("Arial 15 bold"), bg="silver", fg="black")
+                    label4.place(x=x4co, y=y1co)
+                    c = c + 1
+                y1co = y1co + 100
+                if flag > 2:
+                    break
+
+        search_btn = Button(base, text="Search", font=("Arial 20 bold"), command=search)
+        search_btn.place(x=1200, y=140)
+
+    stud_info = Button(base, text="Information Of All Students", wraplength=180, justify=CENTER,
+                        font=("Arial 20 bold"), padx=50, pady=1, command=all_girl_info)
+    stud_info.place(x=400, y=200)
+
+    stud_room_wise = Button(base, text="Room Info", font=("Arial 20 bold"), padx=60, pady=5, command=room_wise)
+    stud_room_wise.place(x=400, y=400)
+
+    line = Canvas(base, height=680, width=5)
+    line.place(x=710, y=105)
